@@ -42,7 +42,11 @@ export function TaskDetailScreen({navigation, route}: Props) {
   return (
     <ScreenContainer scroll>
       <View style={styles.card}>
-        <Text style={[styles.title, task.done && styles.done]}>{task.title}</Text>
+        <Text
+          key={task.done ? 'done' : 'open'}
+          style={[styles.title, task.done && styles.done]}>
+          {task.title}
+        </Text>
         <View style={styles.badges}>
           <PriorityBadge priority={task.priority} />
           {overdue ? <OverdueBadge /> : null}
@@ -115,7 +119,11 @@ const styles = StyleSheet.create({
     borderRadius: radius.card,
     padding: spacing.lg,
   },
-  title: {...typography.headlineSmall, color: colors.onSurface},
+  title: {
+    ...typography.headlineSmall,
+    color: colors.onSurface,
+    textDecorationLine: 'none',
+  },
   done: {textDecorationLine: 'line-through', opacity: 0.5},
   badges: {flexDirection: 'row', gap: spacing.sm, marginVertical: spacing.md},
   row: {flexDirection: 'row', alignItems: 'flex-start', gap: spacing.md, marginTop: spacing.md},

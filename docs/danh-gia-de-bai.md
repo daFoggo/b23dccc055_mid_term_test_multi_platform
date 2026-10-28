@@ -28,7 +28,7 @@ Cập nhật: 2026-10-28. Đối chiếu từng yêu cầu trong [de-bai.md](de-
 | Hiển thị bằng `FlatList` | `task-list-screen.tsx` | Code, Máy ảo |
 | Mỗi dòng: tên, danh mục, hạn, nhãn ưu tiên có màu (đỏ/vàng/xanh) | `task-card.tsx` gồm 2 dòng: tên kèm nhãn ưu tiên bên phải, rồi danh mục · hạn · nhãn "Quá hạn". `priority-badge.tsx` (đỏ Cao, vàng Trung bình, xanh Thấp) | Máy ảo |
 | Checkbox tự làm bằng `Pressable`, nhấn đổi trạng thái | `task-checkbox.tsx` | Máy ảo (tiến độ 3/10 → 4/10) |
-| Việc xong: tên gạch ngang và mờ | `titleDone` trong `task-card.tsx` | Máy ảo |
+| Việc xong: tên gạch ngang và mờ | `titleDone` trong `task-card.tsx`. Đã sửa lỗi: Android không cập nhật `textDecorationLine` trên Text đã mount nên tick xong chỉ mờ mà không gạch; nay `key` theo `done` để dựng lại Text khi đổi trạng thái | Máy ảo (tick Chạy bộ, gạch ngang hiện ngay) |
 | Đầu màn hình: "Đã hoàn thành X/Y công việc" và thanh tiến độ tự vẽ bằng `View` | `progress-header.tsx`, `getProgress` | Test, Máy ảo |
 
 ## 3. Câu 2 – Thêm / Sửa (1,5 điểm)
@@ -38,7 +38,7 @@ Cập nhật: 2026-10-28. Đối chiếu từng yêu cầu trong [de-bai.md](de-
 | Nút "+ Thêm việc" mở form (Stack Navigation) | FAB ở góc dưới gồm icon "+" (cỡ 22) và chữ "Thêm việc", nhãn trợ năng "+ Thêm việc", mở `TaskForm` qua native-stack. Dùng icon thay cho ký tự "+" trong chữ vì ký tự nhìn nhỏ và mảnh | Máy ảo |
 | Một form cho cả thêm và sửa, sửa thì điền sẵn | `task-form-screen.tsx` dùng `route.params.taskId` | Máy ảo (Sửa điền sẵn đúng) |
 | Chọn danh mục và ưu tiên bằng nút bấm | `Chip` cho 4 danh mục và 3 mức ưu tiên | Máy ảo |
-| Tên không trống, không quá 50 ký tự | `validateTask` + bộ đếm `n/50` | Test, Máy ảo (trống) |
+| Tên không trống, không quá 50 ký tự | `validateTask` + bộ đếm `n/50` | Test, Máy ảo (trống và 51 ký tự đều báo lỗi) |
 | Hạn đúng `dd/mm/yyyy` và là ngày có thật (31/02 sai) | `parseDate` kiểm tra vòng UTC | Test, Máy ảo (31/02/2026 báo "Ngày không tồn tại") |
 | Thêm mới: hạn không trước hôm nay | `mode === 'create'` | Test, Máy ảo ("Hạn không được trước hôm nay") |
 | Thông báo lỗi ngay dưới ô nhập | `TextField` | Máy ảo |
@@ -61,7 +61,7 @@ Chưa chạy thử xoá một việc đơn lẻ đến hết (mới thấy hộp
 | Chưa xong mà quá hạn: nhãn "Quá hạn" đỏ ở danh sách và chi tiết | `overdue-badge.tsx`, `isOverdue` | Test, Máy ảo (cả hai màn) |
 | Số ngày còn lại: "Còn N ngày", "Hạn hôm nay", "Quá hạn N ngày" | `dueLabel` | Test; Máy ảo (thấy "Quá hạn 2 ngày") |
 
-Nút "Đánh dấu hoàn thành / Chưa hoàn thành" ở màn Chi tiết hiện đúng chữ và đổi theo trạng thái; chưa chạm thử trên máy ảo (đã thử toggle ở danh sách).
+Nút "Đánh dấu hoàn thành / Chưa hoàn thành" ở màn Chi tiết đã chạm thử trên máy ảo: chữ nút, trạng thái và "Thời hạn" đổi đúng, danh sách cập nhật theo.
 
 ## 6. Câu 5 – Lọc, tìm kiếm, sắp xếp (1,5 điểm)
 
@@ -107,7 +107,6 @@ Nút "Đánh dấu hoàn thành / Chưa hoàn thành" ở màn Chi tiết hiện
 
 ## 10. Việc còn lại trước khi nộp
 
-1. Thử trên máy ảo với **bàn phím mềm** (tắt "Use hardware keyboard") để chắc ô nhập không bị che.
-2. Thử xoá một việc đơn lẻ đến hết và nút "Đánh dấu hoàn thành" ở màn Chi tiết.
-3. Xem lại thư viện còn thừa (`@react-native/new-app-screen`).
-4. Nén project đúng quy định đặt tên và loại thư mục.
+1. Thử trên máy ảo với **bàn phím mềm** (tắt "Use hardware keyboard") để chắc ô nhập không bị che (manifest đang dùng `adjustResize` mặc định của template).
+2. Thử xoá một việc đơn lẻ đến hết (mới thấy hộp thoại xác nhận, chưa bấm Xoá).
+3. Nén project đúng quy định đặt tên và loại thư mục. Gói thừa `@react-native/new-app-screen` đã được gỡ.

@@ -37,6 +37,7 @@ export function TaskCard({task, today, onPress, onLongPress, onToggle}: Props) {
       <View style={styles.body}>
         <View style={styles.titleRow}>
           <Text
+            key={task.done ? 'done' : 'open'}
             numberOfLines={2}
             style={[styles.title, task.done && styles.titleDone]}>
             {task.title}
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     ...typography.titleMedium,
     color: colors.onSurface,
+    textDecorationLine: 'none',
   },
   titleDone: {textDecorationLine: 'line-through', opacity: 0.5},
   metaRow: {
