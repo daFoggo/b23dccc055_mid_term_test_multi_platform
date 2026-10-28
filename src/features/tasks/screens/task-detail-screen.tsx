@@ -9,6 +9,7 @@ import {ScreenContainer} from '../../../components/ui/screen-container';
 import {todayDay} from '../../../lib/date';
 import type {RootStackParamList} from '../../../navigation/types';
 import {colors} from '../../../theme/colors';
+import {fontFamily} from '../../../theme/fonts';
 import {radius, spacing, typography} from '../../../theme/metrics';
 import {OverdueBadge} from '../components/overdue-badge';
 import {PriorityBadge} from '../components/priority-badge';
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
   pad: {padding: spacing.lg},
   card: {
     backgroundColor: colors.surfaceContainerLow,
-    borderRadius: radius.medium,
+    borderRadius: radius.card,
     padding: spacing.lg,
   },
   title: {...typography.headlineSmall, color: colors.onSurface},
@@ -121,6 +122,6 @@ const styles = StyleSheet.create({
   rowText: {flex: 1},
   rowName: {...typography.labelMedium, color: colors.onSurfaceVariant},
   rowValue: {...typography.bodyLarge, color: colors.onSurface, marginTop: spacing.xs},
-  rowHighlight: {color: colors.error, fontWeight: '500'},
+  rowHighlight: {color: colors.error, fontFamily: fontFamily.semibold},
   actions: {gap: spacing.md, marginTop: spacing.xl},
 });

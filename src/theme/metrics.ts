@@ -1,5 +1,7 @@
-// Spacing, bo goc, chu, do bong va kich thuoc cham theo M3 (xem docs/m3/typography-shape-elevation.md).
-import type {TextStyle} from 'react-native';
+// Spacing, bo goc, chu, do bong va kich thuoc cham.
+// Ket hop M3 (thang chu/shape/elevation) voi phong cach phang cua wattprint: the bo 24, o nhap/nut 16, pill cho chip/badge,
+// chi 2 do dam (SemiBold, Bold), chi giu do bong rat nhat cho the danh sach (de bai cham co elevation).
+import {fontFamily} from './fonts';
 
 export const spacing = {
   xs: 4,
@@ -15,34 +17,39 @@ export const radius = {
   extraSmall: 4,
   small: 8,
   medium: 12,
+  control: 16,
   large: 16,
+  card: 24,
   extraLarge: 28,
   full: 999,
 } as const;
 
-type TypeStyle = Required<
-  Pick<TextStyle, 'fontSize' | 'lineHeight' | 'letterSpacing' | 'fontWeight'>
->;
-
-export const typography: Record<string, TypeStyle> = {
-  headlineSmall: {fontSize: 24, lineHeight: 32, letterSpacing: 0, fontWeight: '400'},
-  titleLarge: {fontSize: 22, lineHeight: 28, letterSpacing: 0, fontWeight: '400'},
-  titleMedium: {fontSize: 16, lineHeight: 24, letterSpacing: 0.15, fontWeight: '500'},
-  titleSmall: {fontSize: 14, lineHeight: 20, letterSpacing: 0.1, fontWeight: '500'},
-  bodyLarge: {fontSize: 16, lineHeight: 24, letterSpacing: 0.5, fontWeight: '400'},
-  bodyMedium: {fontSize: 14, lineHeight: 20, letterSpacing: 0.25, fontWeight: '400'},
-  bodySmall: {fontSize: 12, lineHeight: 16, letterSpacing: 0.4, fontWeight: '400'},
-  labelLarge: {fontSize: 14, lineHeight: 20, letterSpacing: 0.1, fontWeight: '500'},
-  labelMedium: {fontSize: 12, lineHeight: 16, letterSpacing: 0.5, fontWeight: '500'},
-  labelSmall: {fontSize: 11, lineHeight: 16, letterSpacing: 0.5, fontWeight: '500'},
+export type TypeStyle = {
+  fontFamily: string;
+  fontSize: number;
+  lineHeight: number;
+  letterSpacing: number;
 };
 
-// Muc elevation M3 (0, 1, 3, 6 dp) bieu dien bang elevation (Android) + shadow (iOS).
+export const typography: Record<string, TypeStyle> = {
+  headlineSmall: {fontFamily: fontFamily.bold, fontSize: 24, lineHeight: 32, letterSpacing: 0},
+  titleLarge: {fontFamily: fontFamily.semibold, fontSize: 22, lineHeight: 28, letterSpacing: 0},
+  titleMedium: {fontFamily: fontFamily.semibold, fontSize: 16, lineHeight: 24, letterSpacing: 0},
+  titleSmall: {fontFamily: fontFamily.semibold, fontSize: 14, lineHeight: 20, letterSpacing: 0},
+  bodyLarge: {fontFamily: fontFamily.regular, fontSize: 16, lineHeight: 24, letterSpacing: 0},
+  bodyMedium: {fontFamily: fontFamily.regular, fontSize: 14, lineHeight: 20, letterSpacing: 0},
+  bodySmall: {fontFamily: fontFamily.regular, fontSize: 12, lineHeight: 16, letterSpacing: 0.1},
+  labelLarge: {fontFamily: fontFamily.semibold, fontSize: 14, lineHeight: 20, letterSpacing: 0},
+  labelMedium: {fontFamily: fontFamily.bold, fontSize: 12, lineHeight: 16, letterSpacing: 0.1},
+  labelSmall: {fontFamily: fontFamily.semibold, fontSize: 11, lineHeight: 16, letterSpacing: 0.2},
+};
+
+// Muc elevation M3 (0, 1, 3, 6 dp) bieu dien bang elevation (Android) + shadow (iOS); bong rat nhat.
 const shadow = (dp: number) => ({
   elevation: dp,
   shadowColor: '#000000',
   shadowOffset: {width: 0, height: dp},
-  shadowOpacity: 0.12 + dp * 0.01,
+  shadowOpacity: dp === 0 ? 0 : 0.04 + dp * 0.01,
   shadowRadius: dp * 2,
 });
 

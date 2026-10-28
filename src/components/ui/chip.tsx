@@ -1,4 +1,4 @@
-// Chip chon duoc (loc, danh muc, uu tien); chip dang chon duoc lam noi bat.
+// Chip dang pill: nen the trang khi chua chon, nen tonal + dau tick khi dang chon.
 import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 import {colors} from '../../theme/colors';
@@ -34,21 +34,17 @@ export function Chip({label, selected, onPress}: Props) {
 
 const styles = StyleSheet.create({
   chip: {
-    minHeight: touchTarget - 8,
-    borderRadius: radius.small,
-    borderWidth: 1,
-    borderColor: colors.outline,
-    paddingHorizontal: spacing.md,
+    minHeight: touchTarget,
+    borderRadius: radius.full,
+    backgroundColor: colors.surfaceContainerLowest,
+    paddingHorizontal: spacing.lg,
     flexDirection: 'row',
     gap: spacing.xs,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  selected: {
-    backgroundColor: colors.secondaryContainer,
-    borderColor: colors.secondaryContainer,
-  },
-  pressed: {opacity: 0.7},
+  selected: {backgroundColor: colors.secondaryContainer},
+  pressed: {transform: [{scale: 0.97}]},
   label: {...typography.labelLarge, color: colors.onSurfaceVariant},
   selectedLabel: {color: colors.onSecondaryContainer},
 });

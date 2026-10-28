@@ -5,6 +5,7 @@ import {TaskDetailScreen} from '../features/tasks/screens/task-detail-screen';
 import {TaskFormScreen} from '../features/tasks/screens/task-form-screen';
 import {TaskListScreen} from '../features/tasks/screens/task-list-screen';
 import {colors} from '../theme/colors';
+import {fontFamily} from '../theme/fonts';
 import type {RootStackParamList} from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -15,6 +16,8 @@ export function RootNavigator() {
       screenOptions={{
         headerStyle: {backgroundColor: colors.surface},
         headerTintColor: colors.onSurface,
+        headerShadowVisible: false,
+        headerTitleStyle: {fontFamily: fontFamily.semibold},
         contentStyle: {backgroundColor: colors.surface},
       }}>
       <Stack.Screen

@@ -1,8 +1,8 @@
-// Extended FAB M3: nut hanh dong chinh noi o goc duoi.
+// Extended FAB phang (khong do bong): nen primary dac, noi o goc duoi.
 import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 import {colors} from '../../theme/colors';
-import {elevation, radius, spacing, typography} from '../../theme/metrics';
+import {radius, spacing, typography} from '../../theme/metrics';
 import {Icon} from './icon';
 
 type Props = {
@@ -19,7 +19,7 @@ export function Fab({label, icon, onPress, accessibilityLabel}: Props) {
       accessibilityLabel={accessibilityLabel ?? label}
       onPress={onPress}
       style={({pressed}) => [styles.fab, pressed && styles.pressed]}>
-      <Icon name={icon} size={24} color={colors.onPrimaryContainer} />
+      <Icon name={icon} size={24} color={colors.onPrimary} />
       <Text style={styles.label}>{label}</Text>
     </Pressable>
   );
@@ -34,11 +34,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    paddingHorizontal: spacing.lg,
-    borderRadius: radius.large,
-    backgroundColor: colors.primaryContainer,
-    ...elevation.level3,
+    paddingHorizontal: spacing.xl,
+    borderRadius: radius.control + 4,
+    backgroundColor: colors.primary,
   },
-  pressed: {opacity: 0.85},
-  label: {...typography.labelLarge, color: colors.onPrimaryContainer},
+  pressed: {transform: [{scale: 0.97}]},
+  label: {...typography.labelLarge, color: colors.onPrimary},
 });

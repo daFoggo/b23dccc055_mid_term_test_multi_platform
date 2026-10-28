@@ -1,5 +1,5 @@
-// O nhap co nhan, vien do + thong bao loi ngay duoi o khi sai.
-import React from 'react';
+// O nhap nen xam dac, khong vien luc nghi; vien primary khi focus, vien do + thong bao loi ngay duoi o khi sai.
+import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import type {TextInputProps} from 'react-native';
 import {colors} from '../../theme/colors';
@@ -11,7 +11,8 @@ type Props = TextInputProps & {
   hint?: string;
 };
 
-export function TextField({label, error, hint, style, ...input}: Props) {
+export function TextField({label, error, hint, style, onFocus, onBlur, ...input}: Props) {
+  const [focused, setFocused] = useState(false);
   return (
     <View style={styles.wrap}>
       <Text style={styles.label}>{label}</Text>
@@ -19,9 +20,18 @@ export function TextField({label, error, hint, style, ...input}: Props) {
         placeholderTextColor={colors.onSurfaceVariant}
         accessibilityLabel={label}
         {...input}
+        onFocus={e => {
+          setFocused(true);
+          onFocus?.(e);
+        }}
+        onBlur={e => {
+          setFocused(false);
+          onBlur?.(e);
+        }}
         style={[
           styles.input,
           input.multiline && styles.multiline,
+          focused && styles.inputFocused,
           error ? styles.inputError : null,
           style,
         ]}
@@ -45,16 +55,17 @@ const styles = StyleSheet.create({
   input: {
     ...typography.bodyLarge,
     color: colors.onSurface,
-    backgroundColor: colors.surfaceContainerLowest,
-    borderWidth: 1,
-    borderColor: colors.outline,
-    borderRadius: radius.extraSmall,
+    backgroundColor: colors.surfaceContainerHigh,
+    borderWidth: 2,
+    borderColor: 'transparent',
+    borderRadius: radius.control,
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
-    minHeight: 48,
+    minHeight: 52,
   },
   multiline: {minHeight: 96, textAlignVertical: 'top'},
-  inputError: {borderColor: colors.error, borderWidth: 2},
+  inputFocused: {borderColor: colors.primary},
+  inputError: {borderColor: colors.error},
   error: {...typography.bodySmall, color: colors.error, marginTop: spacing.xs},
   hint: {
     ...typography.bodySmall,

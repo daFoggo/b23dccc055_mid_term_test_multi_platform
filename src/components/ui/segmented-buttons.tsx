@@ -1,4 +1,4 @@
-// Segmented button M3: chon mot trong vai lua chon ngan (vd. cach sap xep).
+// Segmented button dang pill, nen the trang; muc dang chon nen tonal + dau tick.
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../theme/colors';
@@ -20,7 +20,7 @@ export function SegmentedButtons<T extends string>({
 }: Props<T>) {
   return (
     <View style={styles.row}>
-      {segments.map((s, i) => {
+      {segments.map(s => {
         const selected = s.value === value;
         return (
           <Pressable
@@ -30,9 +30,6 @@ export function SegmentedButtons<T extends string>({
             onPress={() => onChange(s.value)}
             style={({pressed}) => [
               styles.segment,
-              i === 0 && styles.first,
-              i === segments.length - 1 && styles.last,
-              i > 0 && styles.divider,
               selected && styles.selected,
               pressed && styles.pressed,
             ]}>
@@ -52,23 +49,25 @@ export function SegmentedButtons<T extends string>({
 }
 
 const styles = StyleSheet.create({
-  row: {flexDirection: 'row'},
+  row: {
+    flexDirection: 'row',
+    backgroundColor: colors.surfaceContainerLowest,
+    borderRadius: radius.full,
+    padding: spacing.xs,
+    gap: spacing.xs,
+  },
   segment: {
     flex: 1,
-    minHeight: touchTarget - 8,
+    minHeight: touchTarget - spacing.sm,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: spacing.xs,
-    borderWidth: 1,
-    borderColor: colors.outline,
+    borderRadius: radius.full,
     paddingHorizontal: spacing.sm,
   },
-  first: {borderTopLeftRadius: radius.full, borderBottomLeftRadius: radius.full},
-  last: {borderTopRightRadius: radius.full, borderBottomRightRadius: radius.full},
-  divider: {borderLeftWidth: 0},
   selected: {backgroundColor: colors.secondaryContainer},
-  pressed: {opacity: 0.7},
+  pressed: {transform: [{scale: 0.97}]},
   label: {...typography.labelLarge, color: colors.onSurfaceVariant},
   selectedLabel: {color: colors.onSecondaryContainer},
 });

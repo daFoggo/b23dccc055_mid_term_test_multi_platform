@@ -17,7 +17,7 @@ export function OverdueBadge() {
 const styles = StyleSheet.create({
   badge: {
     backgroundColor: colors.error,
-    borderRadius: radius.small,
+    borderRadius: radius.full,
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.xs,
     alignSelf: 'flex-start',

@@ -1,4 +1,4 @@
-// Nut bam M3: filled / tonal / outlined, co hieu ung nhan va trang thai disabled.
+// Nut bam: filled / tonal / outlined, cao 48dp, bo 16, nhan thi thu nho nhe, disabled mo di.
 import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 import type {StyleProp, ViewStyle} from 'react-native';
@@ -41,29 +41,22 @@ export function Button({
         disabled && styles.disabled,
         style,
       ]}>
-      {icon ? (
-        <Icon
-          name={icon}
-          size={18}
-          color={disabled ? colors.onSurfaceVariant : iconColor[variant]}
-        />
-      ) : null}
-      <Text
-        style={[
-          styles.label,
-          labelColor[variant],
-          disabled && styles.disabledLabel,
-        ]}>
-        {label}
-      </Text>
+      {icon ? <Icon name={icon} size={18} color={labelColor[variant]} /> : null}
+      <Text style={[styles.label, {color: labelColor[variant]}]}>{label}</Text>
     </Pressable>
   );
 }
 
+const labelColor: Record<Variant, string> = {
+  filled: colors.onPrimary,
+  tonal: colors.onSecondaryContainer,
+  outlined: colors.primary,
+};
+
 const styles = StyleSheet.create({
   base: {
     minHeight: touchTarget,
-    borderRadius: radius.full,
+    borderRadius: radius.control,
     paddingHorizontal: spacing.xl,
     flexDirection: 'row',
     gap: spacing.sm,
@@ -73,24 +66,7 @@ const styles = StyleSheet.create({
   filled: {backgroundColor: colors.primary},
   tonal: {backgroundColor: colors.secondaryContainer},
   outlined: {borderWidth: 1, borderColor: colors.outline},
-  pressed: {opacity: 0.7},
-  disabled: {
-    backgroundColor: colors.surfaceContainerHighest,
-    borderColor: colors.outlineVariant,
-    opacity: 0.6,
-  },
+  pressed: {transform: [{scale: 0.97}], opacity: 0.9},
+  disabled: {opacity: 0.4},
   label: typography.labelLarge,
-  disabledLabel: {color: colors.onSurfaceVariant},
-});
-
-const iconColor: Record<Variant, string> = {
-  filled: colors.onPrimary,
-  tonal: colors.onSecondaryContainer,
-  outlined: colors.primary,
-};
-
-const labelColor = StyleSheet.create({
-  filled: {color: colors.onPrimary},
-  tonal: {color: colors.onSecondaryContainer},
-  outlined: {color: colors.primary},
 });

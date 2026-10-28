@@ -18,7 +18,7 @@ export function PriorityBadge({priority}: {priority: Priority}) {
 
 const styles = StyleSheet.create({
   badge: {
-    borderRadius: radius.small,
+    borderRadius: radius.full,
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.xs,
     alignSelf: 'flex-start',

@@ -1,4 +1,5 @@
-// Bang mau M3 theo vai tro (baseline light scheme, seed #6750A4) + mau uu tien/trang thai.
+// Bang mau theo vai tro M3 (seed #6750A4) nhung be mat trung tinh kieu wattprint:
+// nen trang xam #F4F4F4, the trang (chenh mau thay cho vien/bong), o nhap xam dac.
 import type {Priority} from '../features/tasks/types';
 
 export const colors = {
@@ -15,16 +16,16 @@ export const colors = {
   onError: '#FFFFFF',
   errorContainer: '#F9DEDC',
   onErrorContainer: '#410E0B',
-  surface: '#FEF7FF',
-  onSurface: '#1D1B20',
-  onSurfaceVariant: '#49454F',
+  surface: '#F4F4F4',
+  onSurface: '#1C1B1F',
+  onSurfaceVariant: '#5F5F63',
   surfaceContainerLowest: '#FFFFFF',
-  surfaceContainerLow: '#F7F2FA',
-  surfaceContainer: '#F3EDF7',
-  surfaceContainerHigh: '#ECE6F0',
-  surfaceContainerHighest: '#E6E0E9',
+  surfaceContainerLow: '#FFFFFF',
+  surfaceContainer: '#F0F0F0',
+  surfaceContainerHigh: '#ECEEED',
+  surfaceContainerHighest: '#E0E3E1',
   outline: '#79747E',
-  outlineVariant: '#CAC4D0',
+  outlineVariant: '#E0E3E1',
   inverseSurface: '#322F35',
   inverseOnSurface: '#F5EFF7',
   scrim: '#000000',
