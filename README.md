@@ -4,7 +4,7 @@ Bài kiểm tra giữa kỳ môn **Phát triển ứng dụng di động đa n�
 
 ![Demo](docs/demo/demo.jpg)
 
-*Từ trái sang phải: danh sách, thêm việc (báo lỗi), chi tiết việc quá hạn, xác nhận xoá.*
+*Từ trái sang phải: danh sách, thêm việc (đang nhập), chi tiết việc quá hạn, xác nhận xoá.*
 
 ## Tính năng
 
