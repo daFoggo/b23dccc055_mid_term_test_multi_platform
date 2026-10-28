@@ -21,6 +21,12 @@ Mục tiêu: giữ hệ vai trò màu, thang chữ và component của Material 
 - Component: segmented button, search bar, extended FAB, snackbar, chip có dấu tick khi chọn.
 - Icon Material (`react-native-vector-icons`).
 
+## Bố cục danh sách (gọn một hàng)
+
+- **Hàng lọc**: 4 ô chia đều trên một hàng, số lượng (SemiBold 16) ở trên, nhãn (12) ở dưới. Ô đang chọn nền `secondaryContainer`; số "Quá hạn" đỏ khi có việc quá hạn. Thay cho hàng chip xuống dòng.
+- **Thẻ công việc 2 dòng**: dòng 1 là tên (tối đa 2 dòng) và nhãn ưu tiên căn phải; dòng 2 là danh mục, hạn, và nhãn "Quá hạn" (khi có). Checkbox căn giữa theo chiều dọc.
+- **FAB** phẳng, nền `primary`, ghi đúng "+ Thêm việc".
+
 ## Ngoại lệ có chủ ý: đổ bóng nhẹ trên thẻ danh sách
 
 Bảng chấm Câu 7, tiêu chí Bố cục (0,5 điểm), yêu cầu thẻ "có bo góc, đổ bóng (elevation/shadow)". Style phẳng của wattprint không dùng bóng, nên app giữ **một lớp elevation 1 rất nhạt** (`shadowOpacity` ≈ 0,05) chỉ cho thẻ công việc. Mọi chỗ khác không dùng bóng. Snackbar vẫn có elevation 6 theo M3.

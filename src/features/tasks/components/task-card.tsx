@@ -1,4 +1,4 @@
-// The cong viec: checkbox, ten (gach ngang khi xong), danh muc, han, nhan uu tien / qua han.
+// The cong viec 2 dong: [ten ........ nhan uu tien] va [danh muc · han · Qua han]; checkbox ben trai.
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../../theme/colors';
@@ -35,19 +35,21 @@ export function TaskCard({task, today, onPress, onLongPress, onToggle}: Props) {
         label={`Đánh dấu hoàn thành ${task.title}`}
       />
       <View style={styles.body}>
-        <Text
-          numberOfLines={2}
-          style={[styles.title, task.done && styles.titleDone]}>
-          {task.title}
-        </Text>
+        <View style={styles.titleRow}>
+          <Text
+            numberOfLines={2}
+            style={[styles.title, task.done && styles.titleDone]}>
+            {task.title}
+          </Text>
+          <View style={task.done && styles.faded}>
+            <PriorityBadge priority={task.priority} />
+          </View>
+        </View>
         <View style={[styles.metaRow, task.done && styles.faded]}>
           <Icon name={meta.icon} size={16} color={meta.color} />
           <Text style={styles.meta}>{task.category}</Text>
           <Icon name="event" size={16} />
           <Text style={styles.meta}>{task.dueDate}</Text>
-        </View>
-        <View style={[styles.badges, task.done && styles.faded]}>
-          <PriorityBadge priority={task.priority} />
           {overdue ? <OverdueBadge /> : null}
         </View>
       </View>
@@ -58,7 +60,7 @@ export function TaskCard({task, today, onPress, onLongPress, onToggle}: Props) {
 const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     backgroundColor: colors.surfaceContainerLow,
     borderRadius: radius.card,
     padding: spacing.lg,
@@ -67,19 +69,24 @@ const styles = StyleSheet.create({
   },
   pressed: {opacity: 0.8},
   body: {flex: 1, marginLeft: spacing.sm},
-  title: {...typography.titleMedium, color: colors.onSurface},
+  titleRow: {flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm},
+  title: {
+    flex: 1,
+    ...typography.titleMedium,
+    color: colors.onSurface,
+  },
   titleDone: {textDecorationLine: 'line-through', opacity: 0.5},
   metaRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
     gap: spacing.xs,
-    marginTop: spacing.xs,
+    marginTop: spacing.sm,
   },
   meta: {
     ...typography.bodyMedium,
     color: colors.onSurfaceVariant,
     marginRight: spacing.sm,
   },
-  badges: {flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm},
   faded: {opacity: 0.5},
 });

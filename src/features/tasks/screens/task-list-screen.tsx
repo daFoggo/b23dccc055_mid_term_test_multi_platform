@@ -83,7 +83,7 @@ export function TaskListScreen({navigation}: Props) {
       <EmptyState
         icon="event-available"
         title="Chưa có công việc nào"
-        message={'Nhấn "Thêm việc" để bắt đầu.'}
+        message={'Nhấn "+ Thêm việc" để bắt đầu.'}
       />
     ) : (
       <EmptyState
@@ -112,9 +112,7 @@ export function TaskListScreen({navigation}: Props) {
         )}
       />
       <Fab
-        icon="add"
-        label="Thêm việc"
-        accessibilityLabel="+ Thêm việc"
+        label="+ Thêm việc"
         onPress={() => navigation.navigate('TaskForm')}
       />
     </ScreenContainer>

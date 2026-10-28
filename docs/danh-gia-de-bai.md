@@ -26,7 +26,7 @@ Cập nhật: 2026-10-28. Đối chiếu từng yêu cầu trong [de-bai.md](de-
 | Yêu cầu | Đã làm | Bằng chứng |
 | --- | --- | --- |
 | Hiển thị bằng `FlatList` | `task-list-screen.tsx` | Code, Máy ảo |
-| Mỗi dòng: tên, danh mục, hạn, nhãn ưu tiên có màu (đỏ/vàng/xanh) | `task-card.tsx`, `priority-badge.tsx` (đỏ Cao, vàng Trung bình, xanh Thấp) | Máy ảo |
+| Mỗi dòng: tên, danh mục, hạn, nhãn ưu tiên có màu (đỏ/vàng/xanh) | `task-card.tsx` gồm 2 dòng: tên kèm nhãn ưu tiên bên phải, rồi danh mục · hạn · nhãn "Quá hạn". `priority-badge.tsx` (đỏ Cao, vàng Trung bình, xanh Thấp) | Máy ảo |
 | Checkbox tự làm bằng `Pressable`, nhấn đổi trạng thái | `task-checkbox.tsx` | Máy ảo (tiến độ 3/10 → 4/10) |
 | Việc xong: tên gạch ngang và mờ | `titleDone` trong `task-card.tsx` | Máy ảo |
 | Đầu màn hình: "Đã hoàn thành X/Y công việc" và thanh tiến độ tự vẽ bằng `View` | `progress-header.tsx`, `getProgress` | Test, Máy ảo |
@@ -35,7 +35,7 @@ Cập nhật: 2026-10-28. Đối chiếu từng yêu cầu trong [de-bai.md](de-
 
 | Yêu cầu | Đã làm | Bằng chứng |
 | --- | --- | --- |
-| Nút "+ Thêm việc" mở form (Stack Navigation) | FAB "Thêm việc" có icon + ở góc dưới, mở `TaskForm` qua native-stack. **Lệch nhẹ**: nhãn là "Thêm việc" kèm biểu tượng +, không phải chuỗi "+ Thêm việc" | Máy ảo |
+| Nút "+ Thêm việc" mở form (Stack Navigation) | FAB ghi đúng "+ Thêm việc" ở góc dưới, mở `TaskForm` qua native-stack | Máy ảo |
 | Một form cho cả thêm và sửa, sửa thì điền sẵn | `task-form-screen.tsx` dùng `route.params.taskId` | Máy ảo (Sửa điền sẵn đúng) |
 | Chọn danh mục và ưu tiên bằng nút bấm | `Chip` cho 4 danh mục và 3 mức ưu tiên | Máy ảo |
 | Tên không trống, không quá 50 ký tự | `validateTask` + bộ đếm `n/50` | Test, Máy ảo (trống) |
@@ -67,7 +67,7 @@ Nút "Đánh dấu hoàn thành / Chưa hoàn thành" ở màn Chi tiết hiện
 
 | Yêu cầu | Đã làm | Bằng chứng |
 | --- | --- | --- |
-| Hàng nút lọc Tất cả / Chưa xong / Đã xong / Quá hạn, nút chọn nổi bật | `task-filter-bar.tsx`, kèm số lượng và dấu tick | Máy ảo |
+| Hàng nút lọc Tất cả / Chưa xong / Đã xong / Quá hạn, nút chọn nổi bật | `task-filter-bar.tsx`: một hàng 4 ô chia đều, số lượng ở trên, nhãn ở dưới, ô đang chọn nền tonal; số quá hạn màu đỏ khi lớn hơn 0 | Máy ảo |
 | Tìm theo tên, không phân biệt hoa/thường | `searchTasks` (còn bỏ dấu tiếng Việt: "hoc" tìm được "Học") | Test, Máy ảo ("bai" → "Hoc bai moi") |
 | Chuyển sắp xếp theo hạn (gần nhất trước) hoặc ưu tiên (Cao → Thấp) | `sort-toggle.tsx` (segmented button) | Test, Máy ảo |
 | Lọc, tìm, sắp xếp đồng thời | `selectVisibleTasks` = lọc → tìm → sắp xếp | Test; Máy ảo (Quá hạn + ưu tiên) |
@@ -109,6 +109,5 @@ Nút "Đánh dấu hoàn thành / Chưa hoàn thành" ở màn Chi tiết hiện
 
 1. Thử trên máy ảo với **bàn phím mềm** (tắt "Use hardware keyboard") để chắc ô nhập không bị che.
 2. Thử xoá một việc đơn lẻ đến hết và nút "Đánh dấu hoàn thành" ở màn Chi tiết.
-3. Quyết định nhãn nút thêm việc: giữ "Thêm việc" + icon hay đổi thành đúng chuỗi "+ Thêm việc".
-4. Xem lại thư viện còn thừa (`@react-native/new-app-screen`).
-5. Nén project đúng quy định đặt tên và loại thư mục.
+3. Xem lại thư viện còn thừa (`@react-native/new-app-screen`).
+4. Nén project đúng quy định đặt tên và loại thư mục.
