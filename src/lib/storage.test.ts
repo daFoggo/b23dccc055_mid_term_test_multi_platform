@@ -16,12 +16,12 @@ test('setJSON then getJSON round-trips', async () => {
 
 test('getJSON reports failure for corrupted JSON', async () => {
   await AsyncStorage.setItem('bad', '{bad');
-  expect(await getJSON('bad')).toEqual({ ok: false });
+  expect(await getJSON('bad')).toEqual({ ok: false, reason: 'parse' });
 });
 
 test('getJSON reports failure when getItem rejects', async () => {
   jest.spyOn(AsyncStorage, 'getItem').mockRejectedValueOnce(new Error('io'));
-  expect(await getJSON('x')).toEqual({ ok: false });
+  expect(await getJSON('x')).toEqual({ ok: false, reason: 'read' });
 });
 
 test('setJSON returns false when setItem rejects', async () => {

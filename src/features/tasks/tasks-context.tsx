@@ -80,11 +80,13 @@ export function TasksProvider({children}: {children: ReactNode}) {
   const skipNextWrite = useRef(true);
   const writeChain = useRef<Promise<unknown>>(Promise.resolve());
   const warned = useRef(false);
+  const canPersist = useRef(true);
 
   useEffect(() => {
     let cancelled = false;
-    loadTasks().then(tasks => {
+    loadTasks().then(({tasks, persist}) => {
       if (!cancelled) {
+        canPersist.current = persist;
         dispatch({type: 'hydrate', tasks});
       }
     });
@@ -99,6 +101,9 @@ export function TasksProvider({children}: {children: ReactNode}) {
     }
     if (skipNextWrite.current) {
       skipNextWrite.current = false;
+      return;
+    }
+    if (!canPersist.current) {
       return;
     }
     const snapshot = state.tasks;

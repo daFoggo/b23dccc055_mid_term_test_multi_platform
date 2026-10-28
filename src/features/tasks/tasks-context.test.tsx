@@ -97,6 +97,18 @@ describe('TasksProvider', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
+  test('does not persist anything when the initial read keeps failing', async () => {
+    await AsyncStorage.setItem(TASKS_KEY, JSON.stringify([]));
+    jest.spyOn(AsyncStorage, 'getItem').mockRejectedValue(new Error('io'));
+    const setSpy = jest.spyOn(AsyncStorage, 'setItem');
+    await mount();
+    await ReactTestRenderer.act(async () => {
+      api.toggleTask(api.tasks[0].id);
+    });
+    await settle();
+    expect(setSpy).not.toHaveBeenCalled();
+  });
+
   test('addTask persists the new task and returns its id', async () => {
     await AsyncStorage.setItem(TASKS_KEY, '[]');
     await mount();

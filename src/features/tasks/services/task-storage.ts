@@ -22,14 +22,23 @@ export function isTask(x: unknown): x is Task {
   );
 }
 
-export async function loadTasks(now: Date = new Date()): Promise<Task[]> {
-  const result = await getJSON<unknown>(TASKS_KEY);
+export type LoadResult = {tasks: Task[]; persist: boolean};
+
+// persist=false: doc loi tam thoi -> chi hien seed trong bo nho, khong ghi de du lieu that.
+export async function loadTasks(now: Date = new Date()): Promise<LoadResult> {
+  let result = await getJSON<unknown>(TASKS_KEY);
+  if (!result.ok && result.reason === 'read') {
+    result = await getJSON<unknown>(TASKS_KEY);
+  }
   if (result.ok && Array.isArray(result.value)) {
-    return result.value.filter(isTask);
+    return {tasks: result.value.filter(isTask), persist: true};
   }
   const seed = createSeedTasks(now);
+  if (!result.ok && result.reason === 'read') {
+    return {tasks: seed, persist: false};
+  }
   await setJSON(TASKS_KEY, seed);
-  return seed;
+  return {tasks: seed, persist: true};
 }
 
 export function saveTasks(tasks: Task[]): Promise<boolean> {
