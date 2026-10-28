@@ -1,0 +1,2 @@
+// validateTask(values, mode)
+export {};
