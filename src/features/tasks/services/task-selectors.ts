@@ -120,3 +120,14 @@ export function selectVisibleTasks(
     controls.sort,
   );
 }
+
+export type FilterCounts = Record<TaskFilter, number>;
+
+export function getFilterCounts(tasks: Task[], today: DayNumber): FilterCounts {
+  return {
+    all: tasks.length,
+    pending: filterTasks(tasks, 'pending', today).length,
+    done: filterTasks(tasks, 'done', today).length,
+    overdue: filterTasks(tasks, 'overdue', today).length,
+  };
+}

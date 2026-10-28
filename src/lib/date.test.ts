@@ -5,6 +5,7 @@ import {
   formatDateInput,
   isRealDate,
   parseDate,
+  quickDueDates,
   todayDay,
 } from './date';
 
@@ -76,5 +77,25 @@ describe('formatDateInput', () => {
     ['', ''],
   ])('%s -> %s', (raw, expected) => {
     expect(formatDateInput(raw)).toBe(expected);
+  });
+});
+
+describe('quickDueDates', () => {
+  const labels = (now: Date) => quickDueDates(now).map(d => d.label);
+  test('offers today, tomorrow, upcoming Saturday and next week', () => {
+    expect(labels(NOW)).toEqual(['Hôm nay', 'Ngày mai', 'Cuối tuần', 'Tuần sau']);
+  });
+  test('values are relative to now (Sunday 15/03/2026 -> Saturday 21/03)', () => {
+    const v = Object.fromEntries(quickDueDates(NOW).map(d => [d.label, d.value]));
+    expect(NOW.getDay()).toBe(0);
+    expect(v['Hôm nay']).toBe('15/03/2026');
+    expect(v['Ngày mai']).toBe('16/03/2026');
+    expect(v['Cuối tuần']).toBe('21/03/2026');
+    expect(v['Tuần sau']).toBe('22/03/2026');
+  });
+  test('on a Saturday the weekend chip jumps to the next Saturday', () => {
+    const sat = new Date(2026, 2, 21, 9);
+    const v = Object.fromEntries(quickDueDates(sat).map(d => [d.label, d.value]));
+    expect(v['Cuối tuần']).toBe('28/03/2026');
   });
 });

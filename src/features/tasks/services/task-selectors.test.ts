@@ -4,6 +4,7 @@ import {
   daysLeft,
   dueLabel,
   filterTasks,
+  getFilterCounts,
   getProgress,
   isOverdue,
   searchTasks,
@@ -162,5 +163,24 @@ describe('selectVisibleTasks', () => {
     expect(() =>
       selectVisibleTasks(tasks, {filter: 'overdue', query: '', sort: 'dueDate'}, TODAY),
     ).not.toThrow();
+  });
+});
+
+describe('getFilterCounts', () => {
+  test('counts every filter bucket', () => {
+    const tasks = [
+      task({dueDate: '10/03/2026'}),
+      task({dueDate: '20/03/2026'}),
+      task({done: true}),
+    ];
+    expect(getFilterCounts(tasks, TODAY)).toEqual({
+      all: 3,
+      pending: 2,
+      done: 1,
+      overdue: 1,
+    });
+  });
+  test('empty list gives zeros', () => {
+    expect(getFilterCounts([], TODAY)).toEqual({all: 0, pending: 0, done: 0, overdue: 0});
   });
 });

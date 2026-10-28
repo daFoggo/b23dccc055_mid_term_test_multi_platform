@@ -1,9 +1,6 @@
 // Stack navigator: TaskList, TaskForm, TaskDetail.
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Button} from '../components/ui/button';
 import {TaskDetailScreen} from '../features/tasks/screens/task-detail-screen';
 import {TaskFormScreen} from '../features/tasks/screens/task-form-screen';
 import {TaskListScreen} from '../features/tasks/screens/task-list-screen';
@@ -11,18 +8,6 @@ import {colors} from '../theme/colors';
 import type {RootStackParamList} from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
-function AddTaskButton() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  return (
-    <Button
-      label="+ Thêm việc"
-      variant="tonal"
-      onPress={() => navigation.navigate('TaskForm')}
-    />
-  );
-}
 
 export function RootNavigator() {
   return (
@@ -35,7 +20,7 @@ export function RootNavigator() {
       <Stack.Screen
         name="TaskList"
         component={TaskListScreen}
-        options={{title: 'Kế hoạch cá nhân', headerRight: AddTaskButton}}
+        options={{title: 'Kế hoạch cá nhân'}}
       />
       <Stack.Screen
         name="TaskForm"

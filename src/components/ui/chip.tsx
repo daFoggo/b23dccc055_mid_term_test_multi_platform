@@ -3,6 +3,7 @@ import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 import {colors} from '../../theme/colors';
 import {radius, spacing, touchTarget, typography} from '../../theme/metrics';
+import {Icon} from './icon';
 
 type Props = {
   label: string;
@@ -21,6 +22,9 @@ export function Chip({label, selected, onPress}: Props) {
         selected && styles.selected,
         pressed && styles.pressed,
       ]}>
+      {selected ? (
+        <Icon name="check" size={18} color={colors.onSecondaryContainer} />
+      ) : null}
       <Text style={[styles.label, selected && styles.selectedLabel]}>
         {label}
       </Text>
@@ -35,6 +39,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.outline,
     paddingHorizontal: spacing.md,
+    flexDirection: 'row',
+    gap: spacing.xs,
     alignItems: 'center',
     justifyContent: 'center',
   },

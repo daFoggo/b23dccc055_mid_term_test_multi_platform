@@ -6,6 +6,8 @@ import {EmptyState} from '../../../components/states/empty-state';
 import {Button} from '../../../components/ui/button';
 import {Chip} from '../../../components/ui/chip';
 import {ScreenContainer} from '../../../components/ui/screen-container';
+import {useSnackbar} from '../../../components/ui/snackbar';
+import {quickDueDates} from '../../../lib/date';
 import {TextField} from '../../../components/ui/text-field';
 import type {RootStackParamList} from '../../../navigation/types';
 import {colors} from '../../../theme/colors';
@@ -43,14 +45,17 @@ function TaskForm({
   navigation: Props['navigation'];
 }) {
   const {addTask, updateTask} = useTasks();
+  const showMessage = useSnackbar();
   const {values, errors, setField, submit} = useTaskForm({
     mode: initial ? 'edit' : 'create',
     initial,
     onValid: v => {
       if (initial) {
         updateTask(initial.id, v);
+        showMessage('Đã cập nhật công việc');
       } else {
         addTask(v);
+        showMessage('Đã thêm công việc');
       }
       navigation.goBack();
     },
@@ -107,8 +112,19 @@ function TaskForm({
         maxLength={10}
         placeholder="dd/mm/yyyy"
       />
+      <View style={styles.quickRow}>
+        {quickDueDates().map(q => (
+          <Chip
+            key={q.label}
+            label={q.label}
+            selected={values.dueDate === q.value}
+            onPress={() => setField('dueDate', q.value)}
+          />
+        ))}
+      </View>
       <Button
         label={initial ? 'Lưu thay đổi' : 'Thêm công việc'}
+        icon={initial ? 'save' : 'add-task'}
         onPress={submit}
       />
     </ScreenContainer>
@@ -129,4 +145,11 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
   over: {borderColor: colors.error},
+  quickRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+    marginTop: -spacing.sm,
+    marginBottom: spacing.xl,
+  },
 });

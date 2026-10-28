@@ -15,8 +15,5 @@ export function useTaskListControls(tasks: Task[]) {
     [tasks, filter, query, sort, today],
   );
 
-  const toggleSort = () =>
-    setSort(s => (s === 'dueDate' ? 'priority' : 'dueDate'));
-
-  return {filter, setFilter, query, setQuery, sort, toggleSort, visible, today};
+  return {filter, setFilter, query, setQuery, sort, setSort, visible, today};
 }

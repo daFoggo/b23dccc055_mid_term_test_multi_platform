@@ -4,11 +4,13 @@ import {Pressable, StyleSheet, Text} from 'react-native';
 import type {StyleProp, ViewStyle} from 'react-native';
 import {colors} from '../../theme/colors';
 import {radius, spacing, touchTarget, typography} from '../../theme/metrics';
+import {Icon} from './icon';
 
 type Variant = 'filled' | 'tonal' | 'outlined';
 
 type Props = {
   label: string;
+  icon?: string;
   onPress: () => void;
   variant?: Variant;
   disabled?: boolean;
@@ -18,6 +20,7 @@ type Props = {
 
 export function Button({
   label,
+  icon,
   onPress,
   variant = 'filled',
   disabled = false,
@@ -38,6 +41,13 @@ export function Button({
         disabled && styles.disabled,
         style,
       ]}>
+      {icon ? (
+        <Icon
+          name={icon}
+          size={18}
+          color={disabled ? colors.onSurfaceVariant : iconColor[variant]}
+        />
+      ) : null}
       <Text
         style={[
           styles.label,
@@ -55,6 +65,8 @@ const styles = StyleSheet.create({
     minHeight: touchTarget,
     borderRadius: radius.full,
     paddingHorizontal: spacing.xl,
+    flexDirection: 'row',
+    gap: spacing.sm,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -70,6 +82,12 @@ const styles = StyleSheet.create({
   label: typography.labelLarge,
   disabledLabel: {color: colors.onSurfaceVariant},
 });
+
+const iconColor: Record<Variant, string> = {
+  filled: colors.onPrimary,
+  tonal: colors.onSecondaryContainer,
+  outlined: colors.primary,
+};
 
 const labelColor = StyleSheet.create({
   filled: {color: colors.onPrimary},

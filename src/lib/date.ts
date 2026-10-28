@@ -69,3 +69,16 @@ export function formatDateInput(raw: string): string {
   }
   return out;
 }
+
+export type QuickDate = {label: string; value: string};
+
+/** Cac moc ngay chon nhanh: hom nay, ngay mai, thu Bay sap toi, tuan sau. */
+export function quickDueDates(now: Date = new Date()): QuickDate[] {
+  const untilSaturday = (6 - now.getDay() + 7) % 7 || 7;
+  return [
+    {label: 'Hôm nay', value: addDaysToToday(0, now)},
+    {label: 'Ngày mai', value: addDaysToToday(1, now)},
+    {label: 'Cuối tuần', value: addDaysToToday(untilSaturday, now)},
+    {label: 'Tuần sau', value: addDaysToToday(7, now)},
+  ];
+}

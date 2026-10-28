@@ -3,6 +3,8 @@ import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../../theme/colors';
 import {elevation, radius, spacing, typography} from '../../../theme/metrics';
+import {Icon} from '../../../components/ui/icon';
+import {categoryMeta} from '../category-meta';
 import {isOverdue} from '../services/task-selectors';
 import type {Task} from '../types';
 import {OverdueBadge} from './overdue-badge';
@@ -19,6 +21,7 @@ type Props = {
 
 export function TaskCard({task, today, onPress, onLongPress, onToggle}: Props) {
   const overdue = isOverdue(task, today);
+  const meta = categoryMeta(task.category);
   return (
     <Pressable
       accessibilityRole="button"
@@ -37,9 +40,12 @@ export function TaskCard({task, today, onPress, onLongPress, onToggle}: Props) {
           style={[styles.title, task.done && styles.titleDone]}>
           {task.title}
         </Text>
-        <Text style={[styles.meta, task.done && styles.faded]}>
-          {task.category} · Hạn {task.dueDate}
-        </Text>
+        <View style={[styles.metaRow, task.done && styles.faded]}>
+          <Icon name={meta.icon} size={16} color={meta.color} />
+          <Text style={styles.meta}>{task.category}</Text>
+          <Icon name="event" size={16} />
+          <Text style={styles.meta}>{task.dueDate}</Text>
+        </View>
         <View style={[styles.badges, task.done && styles.faded]}>
           <PriorityBadge priority={task.priority} />
           {overdue ? <OverdueBadge /> : null}
@@ -63,10 +69,16 @@ const styles = StyleSheet.create({
   body: {flex: 1, marginLeft: spacing.sm},
   title: {...typography.titleMedium, color: colors.onSurface},
   titleDone: {textDecorationLine: 'line-through', opacity: 0.5},
+  metaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    marginTop: spacing.xs,
+  },
   meta: {
     ...typography.bodyMedium,
     color: colors.onSurfaceVariant,
-    marginTop: spacing.xs,
+    marginRight: spacing.sm,
   },
   badges: {flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm},
   faded: {opacity: 0.5},
