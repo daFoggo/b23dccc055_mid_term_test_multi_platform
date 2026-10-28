@@ -2,7 +2,7 @@
 
 Bài kiểm tra giữa kỳ môn **Phát triển ứng dụng di động đa nền tảng** (Đề 3), làm bằng **React Native CLI** (không Expo), TypeScript.
 
-![Demo](docs/demo/demo.jpg)
+![Demo](docs/demo/demo-form.jpg)
 
 *Từ trái sang phải: danh sách, thêm việc (đang nhập), chi tiết việc quá hạn, xác nhận xoá.*
 
