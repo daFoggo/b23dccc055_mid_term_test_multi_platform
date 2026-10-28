@@ -25,7 +25,7 @@ Mục tiêu: giữ hệ vai trò màu, thang chữ và component của Material 
 
 - **Hàng lọc**: 4 ô chia đều trên một hàng, số lượng (SemiBold 16) ở trên, nhãn (12) ở dưới. Ô đang chọn nền `secondaryContainer`; số "Quá hạn" đỏ khi có việc quá hạn. Thay cho hàng chip xuống dòng.
 - **Thẻ công việc 2 dòng**: dòng 1 là tên (tối đa 2 dòng) và nhãn ưu tiên căn phải; dòng 2 là danh mục, hạn, và nhãn "Quá hạn" (khi có). Checkbox căn giữa theo chiều dọc.
-- **FAB** phẳng, nền `primary`, ghi đúng "+ Thêm việc".
+- **FAB** phẳng, nền `primary`, icon "add" cỡ 22 kèm chữ "Thêm việc" (nhãn trợ năng "+ Thêm việc").
 
 ## Ngoại lệ có chủ ý: đổ bóng nhẹ trên thẻ danh sách
 

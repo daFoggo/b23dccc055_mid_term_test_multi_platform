@@ -35,7 +35,7 @@ Cập nhật: 2026-10-28. Đối chiếu từng yêu cầu trong [de-bai.md](de-
 
 | Yêu cầu | Đã làm | Bằng chứng |
 | --- | --- | --- |
-| Nút "+ Thêm việc" mở form (Stack Navigation) | FAB ghi đúng "+ Thêm việc" ở góc dưới, mở `TaskForm` qua native-stack | Máy ảo |
+| Nút "+ Thêm việc" mở form (Stack Navigation) | FAB ở góc dưới gồm icon "+" (cỡ 22) và chữ "Thêm việc", nhãn trợ năng "+ Thêm việc", mở `TaskForm` qua native-stack. Dùng icon thay cho ký tự "+" trong chữ vì ký tự nhìn nhỏ và mảnh | Máy ảo |
 | Một form cho cả thêm và sửa, sửa thì điền sẵn | `task-form-screen.tsx` dùng `route.params.taskId` | Máy ảo (Sửa điền sẵn đúng) |
 | Chọn danh mục và ưu tiên bằng nút bấm | `Chip` cho 4 danh mục và 3 mức ưu tiên | Máy ảo |
 | Tên không trống, không quá 50 ký tự | `validateTask` + bộ đếm `n/50` | Test, Máy ảo (trống) |

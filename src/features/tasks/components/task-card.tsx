@@ -45,11 +45,13 @@ export function TaskCard({task, today, onPress, onLongPress, onToggle}: Props) {
             <PriorityBadge priority={task.priority} />
           </View>
         </View>
-        <View style={[styles.metaRow, task.done && styles.faded]}>
-          <Icon name={meta.icon} size={16} color={meta.color} />
-          <Text style={styles.meta}>{task.category}</Text>
-          <Icon name="event" size={16} />
-          <Text style={styles.meta}>{task.dueDate}</Text>
+        <View style={styles.metaRow}>
+          <View style={[styles.metaInfo, task.done && styles.faded]}>
+            <Icon name={meta.icon} size={16} color={meta.color} />
+            <Text style={styles.meta}>{task.category}</Text>
+            <Icon name="event" size={16} />
+            <Text style={styles.meta}>{task.dueDate}</Text>
+          </View>
           {overdue ? <OverdueBadge /> : null}
         </View>
       </View>
@@ -79,9 +81,16 @@ const styles = StyleSheet.create({
   metaRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: spacing.sm,
+    marginTop: spacing.sm,
+  },
+  metaInfo: {
+    flexShrink: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
     flexWrap: 'wrap',
     gap: spacing.xs,
-    marginTop: spacing.sm,
   },
   meta: {
     ...typography.bodyMedium,

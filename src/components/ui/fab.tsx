@@ -19,7 +19,7 @@ export function Fab({label, icon, onPress, accessibilityLabel}: Props) {
       accessibilityLabel={accessibilityLabel ?? label}
       onPress={onPress}
       style={({pressed}) => [styles.fab, pressed && styles.pressed]}>
-      {icon ? <Icon name={icon} size={24} color={colors.onPrimary} /> : null}
+      {icon ? <Icon name={icon} size={22} color={colors.onPrimary} /> : null}
       <Text style={styles.label}>{label}</Text>
     </Pressable>
   );

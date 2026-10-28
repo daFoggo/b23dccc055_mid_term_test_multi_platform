@@ -112,7 +112,9 @@ export function TaskListScreen({navigation}: Props) {
         )}
       />
       <Fab
-        label="+ Thêm việc"
+        icon="add"
+        label="Thêm việc"
+        accessibilityLabel="+ Thêm việc"
         onPress={() => navigation.navigate('TaskForm')}
       />
     </ScreenContainer>
